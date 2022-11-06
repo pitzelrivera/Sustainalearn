@@ -2,6 +2,7 @@ import './App.css';
 import NavBar from "./NavBar";
 import Homepage from "./pages/Homepage";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import './styles.css'
 
 function App() {
   return (
