@@ -1,4 +1,5 @@
 import { GoogleLogin } from 'react-google-login';
+import './NavBar.css';
 
 const clientId = "582207653637-v3rikhn31efm2nshrtbclkq4bqogeh47.apps.googleusercontent.com";
 
@@ -14,7 +15,7 @@ function Login() {
 	    <GoogleLogin
 	clientId={clientId}
 	render={renderProps => (
-		<button onClick={renderProps.onClick} disabled={renderProps.disabled}>Login</button>
+		<button onClick={renderProps.onClick} disabled={renderProps.disabled} type="button" class="button">Login</button>
 	)}
 	onSuccess={responseGoogle}
 	    onFailure={responseGoogle}
