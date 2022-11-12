@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
 import Axios from 'axios'
-import { Article, Post, User } from "../types";
-
-//const Post = require("../types");
+import { User, Post, Article, Tag, ArticleTag } from "../types";
 
 const Search = () => {
 
@@ -19,11 +17,6 @@ const Search = () => {
 
         Axios.post("http://localhost:3001/api/createPost", {
             Post: newPost
-            /*userID: userID,
-            articleID: articleID,
-            parentID: parentID,
-            message: message,
-            highlight: highlight*/
         });
     };
 

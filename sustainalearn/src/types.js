@@ -33,4 +33,19 @@ class Article {
         this.view = view;
     }
 }
-module.exports = { Article, Post, User };
+
+class Tag {
+    constructor(id, tag) {
+        this.id = id;
+        this.tag = tag;
+    }
+}
+
+class ArticleTag {
+    constructor(articleID, tagID) {
+        this.articleID = articleID;
+        this.tagID = tagID;
+    }
+}
+
+module.exports = { User, Post, Article, Tag, ArticleTag };

@@ -1,19 +1,8 @@
-/*
-const express = require('express');
-const operation = require('./db/operations');
-const cors = require('cors');
-
-operation.getUsers().then(res => {
-    console.log(res);
-})
-*/
-
-//import { Article, Post, User } from "./src/types";
 const express = require('express');
 const db = require('./db/config')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { Article, Post, User } = require('./src/types')
+const { User, Post, Article, Tag, ArticleTag } = require('./src/types')
 
 const app = express();
 app.use(cors());
@@ -65,6 +54,26 @@ function makeArticles(result) {
     return articleArray;
 }
 
+function makeTags(result) {
+    var tagArray = [];
+    for (i = 0; i < result.length; i++) {
+        const id = result[i].id;
+        const tag = result[i].tag;
+        articleArray.push(new Article(id, tag));
+    }
+    return tagArray;
+}
+
+function makeArticleTags(result) {
+    var articletagArray = [];
+    for (i = 0; i < result.length; i++) {
+        const articleID = result[i].articleID;
+        const tagID = result[i].tagID;
+        articleArray.push(new Article(articleID, tagID));
+    }
+    return articletagArray;
+}
+
 ///////////////////////////////// USER ROUTES /////////////////////////////////
 
 // Route to get all users
@@ -93,14 +102,15 @@ app.get("/api/getUser/:id", (req, res) => {
 
 // Route to create a user
 app.post("/api/createUser", (req, res) => {
+    const id = req.body.User.id;
     const username = req.body.User.username;
-    const email= req.body.Post.email;
+    const email= req.body.User.email;
     var date = new Date();
     const registeredAt = date.toISOString().slice(0, 19).replace('T', ' ');
 
     const sqlInsert =
-        "INSERT INTO userpost (username, email, registeredAt) VALUES (?,?,?)";
-    db.query(sqlInsert, [username, email, registeredAt], (err, result) => {
+        "INSERT INTO user (id, username, email, registeredAt) VALUES (?,?,?,?)";
+    db.query(sqlInsert, [id, username, email, registeredAt], (err, result) => {
         if (err) { console.log(err) }
         console.log(result);
     });
@@ -112,7 +122,7 @@ app.post("/api/deleteUser/:id", (req, res) => {
 
     const sqlDelete =
         "DELETE FROM user WHERE id = ?";
-    db.query(sqlUpdate, id, (err, result) => {
+    db.query(sqlDelete, id, (err, result) => {
         if (err) { console.log(err) }
         console.log(result);
     });
@@ -176,7 +186,7 @@ app.post("/api/deletePost/:id", (req, res) => {
 
     const sqlDelete =
         "DELETE FROM userpost WHERE id = ?";
-    db.query(sqlUpdate, id, (err, result) => {
+    db.query(sqlDelete, id, (err, result) => {
         if (err) { console.log(err) }
         console.log(result);
     });
@@ -204,8 +214,9 @@ app.get("/api/getArticle/:id", (req, res) => {
     const sqlSelect =
         "SELECT * FROM article WHERE id = ?";
     db.query(sqlSelect, id, (err, result) => {
-        console.log(result);
-        res.send(result);
+        articleArray = makeArticles(result);
+        console.log(articleArray);
+        res.send(articleArray);
     });
 })
 
@@ -230,12 +241,144 @@ app.post("/api/createArticle", (req, res) => {
 });
 
 // Route to delete an article
-app.post("/api/deleteUser/:id", (req, res) => {
+app.post("/api/deleteArticle/:id", (req, res) => {
     const id = req.params.id;
 
     const sqlDelete =
         "DELETE FROM article WHERE id = ?";
-    db.query(sqlUpdate, id, (err, result) => {
+    db.query(sqlDelete, id, (err, result) => {
+        if (err) { console.log(err) }
+        console.log(result);
+    });
+});
+///////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////// TAG ROUTES /////////////////////////////////
+
+// Route to get all tags
+app.get("/api/getTags", (req, res) => {
+    const sqlSelect =
+        "SELECT * FROM tag";
+    db.query(sqlSelect, (err, result) => {
+        tagArray = makeTags(result);
+        console.log(tagArray);
+        res.send(tagArray);
+    });
+})
+
+// Route to get a tag by id
+app.get("/api/getTagID/:id", (req, res) => {
+    const id = req.params.id;
+
+    const sqlSelect =
+        "SELECT * FROM tag WHERE id = ?";
+    db.query(sqlSelect, id, (err, result) => {
+        tagArray = makeTags(result);
+        console.log(tagArray);
+        res.send(tagArray);
+    });
+})
+
+// Route to get a tag by tag
+app.get("/api/getTag/:tag", (req, res) => {
+    const tag = req.params.tag;
+
+    const sqlSelect =
+        "SELECT * FROM tag WHERE tag = ?";
+    db.query(sqlSelect, tag, (err, result) => {
+        tagArray = makeTags(result);
+        console.log(tagArray);
+        res.send(tagArray);
+    });
+})
+
+// Route to create a tag
+app.post("/api/createTag", (req, res) => {
+    const id = req.body.Tag.id;
+    const tag = req.body.Tag.tag;
+
+    const sqlInsert =
+        "INSERT INTO tag (id, tag) VALUES (?,?)";
+    db.query(sqlInsert, [id, tag], (err, result) => {
+        if (err) { console.log(err) }
+        console.log(result);
+    });
+});
+
+// Route to delete a tag by id
+app.post("/api/deleteTagID/:id", (req, res) => {
+    const id = req.params.id;
+
+    const sqlDelete =
+        "DELETE FROM tag WHERE id = ?";
+    db.query(sqlDelete, id, (err, result) => {
+        if (err) { console.log(err) }
+        console.log(result);
+    });
+});
+
+// Route to delete a tag by tag
+app.post("/api/deleteTag/:tag", (req, res) => {
+    const tag = req.params.tag;
+
+    const sqlDelete =
+        "DELETE FROM tag WHERE tag = ?";
+    db.query(sqlDelete, tag, (err, result) => {
+        if (err) { console.log(err) }
+        console.log(result);
+    });
+});
+///////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////// ARTICLETAG ROUTES //////////////////////////////
+
+// Route to get all articletags
+app.get("/api/getArticleTags", (req, res) => {
+    const sqlSelect =
+        "SELECT * FROM articletag";
+    db.query(sqlSelect, (err, result) => {
+        articletagArray = makeArticleTags(result);
+        console.log(articletagArray);
+        res.send(articletagArray);
+    });
+})
+
+// Route to get all of an article's tags
+app.get("/api/getArticleTags/:id", (req, res) => {
+    const articleID = req.params.id;
+
+    const sqlSelect =
+        "SELECT * FROM articletag WHERE articleID = ?";
+    db.query(sqlSelect, articleID, (err, result) => {
+        articletagArray = makeArticleTags(result);
+        console.log(articletagArray);
+        res.send(articletagArray);
+    });
+})
+
+// Route to create an articletag relation
+app.post("/api/createArticleTag", (req, res) => {
+    const articleID = req.body.ArticleTag.articleID;
+    const tagID = req.body.ArticleTag.tagID;
+
+    const sqlInsert =
+        "INSERT INTO articletag (articleID, tagID) VALUES (?,?)";
+    db.query(sqlInsert, [articleID, tagID], (err, result) => {
+        if (err) { console.log(err) }
+        console.log(result);
+    });
+});
+
+// Route to delete an articletag relation
+app.post("/api/deleteArticleTag", (req, res) => {
+    const articleID = req.body.ArticleTag.articleID;
+    const tagID = req.body.ArticleTag.tagID;
+
+    const sqlDelete =
+        "DELETE FROM articletag WHERE articleID = ? AND tagID = ?";
+    db.query(sqlDelete, [articleID, tagID], (err, result) => {
         if (err) { console.log(err) }
         console.log(result);
     });
