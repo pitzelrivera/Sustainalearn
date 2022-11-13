@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('./db/config')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { User, Post, Article, Tag, ArticleTag } = require('./src/types')
+const { User, Post, Article, Tag, ArticleTag } = require('./db/types')
 
 const app = express();
 app.use(cors());
