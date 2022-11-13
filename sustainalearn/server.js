@@ -111,7 +111,10 @@ app.post("/api/createUser", (req, res) => {
     const sqlInsert =
         "INSERT INTO user (id, username, email, registeredAt) VALUES (?,?,?,?)";
     db.query(sqlInsert, [id, username, email, registeredAt], (err, result) => {
-        if (err) { console.log(err) }
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
         console.log(result);
     });
 });
@@ -175,7 +178,10 @@ app.post("/api/createPost", (req, res) => {
     const sqlInsert =
         "INSERT INTO userpost (userID, articleID, parentID, message, highlight, score, postedAt) VALUES (?,?,?,?,?,?,?)";
     db.query(sqlInsert, [userID, articleID, parentID, message, highlight, score, postedAt], (err, result) => {
-        if (err) { console.log(err) }
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
         console.log(result);
     });
 });
@@ -235,7 +241,10 @@ app.post("/api/createArticle", (req, res) => {
     const sqlInsert =
         "INSERT INTO article (title, content, source, doi, references, enteredAt, publishedAt, view) VALUES (?,?,?,?,?,?,?,?)";
     db.query(sqlInsert, [title, content, source, doi, references, enteredAt, publishedAt, view], (err, result) => {
-        if (err) { console.log(err) }
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
         console.log(result);
     });
 });
@@ -301,7 +310,10 @@ app.post("/api/createTag", (req, res) => {
     const sqlInsert =
         "INSERT INTO tag (id, tag) VALUES (?,?)";
     db.query(sqlInsert, [id, tag], (err, result) => {
-        if (err) { console.log(err) }
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
         console.log(result);
     });
 });
@@ -366,7 +378,10 @@ app.post("/api/createArticleTag", (req, res) => {
     const sqlInsert =
         "INSERT INTO articletag (articleID, tagID) VALUES (?,?)";
     db.query(sqlInsert, [articleID, tagID], (err, result) => {
-        if (err) { console.log(err) }
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
         console.log(result);
     });
 });
