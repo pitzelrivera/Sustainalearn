@@ -1,7 +1,8 @@
 import './App.css';
 import NavBar from "./NavBar";
 import Homepage from "./pages/Homepage";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Search from "./pages/Search";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './styles.css'
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
             <h1>Sustainalearn</h1>
             <div id="page-body">
                 <Routes>
-                    <Route path={"/"} element={<Homepage/>} />
+                      <Route path={"/"} element={<Homepage />} />
+                      <Route path={"/search"} element={<Search />} />
                 </Routes>
             </div>
         </div>

@@ -14,6 +14,6 @@ Code Analysis: Emerge (https://github.com/glato/emerge) which is user dependent 
 2. Clone the repo
 3. Open terminal
 3. change into directory ./sustainalearn
-4. "npm run" or "npm run start"
+4. "npm run dev" to start frontend and backend
    1. if error "react-scripts: command not found"
-   2. run npm install
+   2. run "npm install --legacy-peer-deps"
