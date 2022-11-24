@@ -8,9 +8,10 @@ class User {
 }
 
 class Post {
-    constructor(id, userID, articleID, parentID, message, highlight, score, postedAt) {
+    constructor(id, userID, username, articleID, parentID, message, highlight, score, postedAt) {
         this.id = id;
         this.userID = userID;
+        this.username = username;
         this.articleID = articleID;
         this.parentID = parentID;
         this.message = message;
@@ -21,7 +22,7 @@ class Post {
 }
 
 class Article {
-    constructor(id, title, content, source, doi, references, enteredAt, publishedAt, view) {
+    constructor(id, title, content, source, doi, references, enteredAt, publishedAt, view, posts) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -31,6 +32,7 @@ class Article {
         this.enteredAt = enteredAt;
         this.publishedAt = publishedAt;
         this.view = view;
+        this.posts = posts;
     }
 }
 

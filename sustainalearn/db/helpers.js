@@ -1,0 +1,71 @@
+const Axios = require('axios')
+const _ = require('lodash')
+
+function removeDuplicates(array, property) {
+    return array.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj[property]).indexOf(obj[property]) === pos;
+    })
+}
+
+async function tagHelper(tag) {
+    // Fetch tags that match input
+    var tagArray;
+    var url = "http://localhost:3001/api/getTag/" + tag;
+    const result = await Axios.get(url)
+        .then((response) => {
+            tagArray = (response.data);
+        })
+    console.log("tagArray: ");
+    console.log(tagArray);
+
+    if (tagArray.length === 0) {
+        return [];
+    }
+
+    // Fetch all article/tag pairs of found tags
+    var articletagArray = [];
+    for (let i = 0; i < tagArray.length; i++) {
+        url = "http://localhost:3001/api/getArticleTagsTID/" + (tagArray[i].id).toString();
+
+        const result = await Axios.get(url)
+            .then((response) => {
+                if (response.data.length != 0) {
+                    articletagArray.push(response.data);
+                }
+            })
+    }
+    var copy = articletagArray;
+    articletagArray = _.flatten(copy);
+    console.log("articletagArray: ");
+    console.log(articletagArray);
+
+    if (articletagArray.length === 0) {
+        return [];
+    }
+
+    // Fetch all matching articles
+    var articleArray = [];
+    for (let i = 0; i < articletagArray.length; i++) {
+        console.log("i = " + i);
+        console.log(articletagArray[i]);
+        console.log("articletagArray[i].articleID: ");
+        console.log(articletagArray[i].articleID);
+
+        url = "http://localhost:3001/api/getArticle/" + (articletagArray[i].articleID).toString();
+        console.log(url);
+
+        const result = await Axios.get(url)
+            .then((response) => {
+                articleArray.push(response.data);
+            })
+    }
+    var copy = articleArray;
+    articleArray = _.flatten(copy);
+    console.log("articleArray: ");
+    console.log(articleArray);
+
+    articleArray = removeDuplicates(articleArray, 'id');
+    return articleArray;
+}
+
+module.exports = { removeDuplicates, tagHelper };
