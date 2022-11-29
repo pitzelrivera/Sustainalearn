@@ -11,7 +11,7 @@ class BbcSpider(scrapy.Spider):
     start_urls = ['http://bbcearth.com/news/elbow-grease-and-tech-fighting-the-plastic-crisis']
 
     custom_settings={
-        'FEED_URI': 'bbc_articles.json',
+        'FEED_URI': 'articles.json',
         'FEED_FORMAT': 'json'
     }
 
@@ -20,8 +20,9 @@ class BbcSpider(scrapy.Spider):
 
         article['title'] = response.xpath('//h1/text()').get()
         article['author'] = "By " + response.xpath('//p[@class="content-hero__author gel--pica"]/span/text()').get()
-        article['content'] = response.xpath('//div[@class="rich-text undefined"]/div/p/text()').getall()
+        article['content'] = response.xpath('//div[@class="rich-text undefined"]/div//*[self::p or self::h2]/text()').getall()
         article['url'] = response.url
+        #article['id'] = 1
 
         return article
 
