@@ -5,8 +5,8 @@ import Login from './Login';
 function NavBar() {
     return (
         <div className="NavBar">
-            <a href="/search">
-                <button type="button" class="button"> Search </button>
+            <a href="/submission">
+                <button type="button" class="button"> Submit an Article! </button>
             </a>
             <a href="/articles">
                 <button type="button" class="button"> Articles </button>
