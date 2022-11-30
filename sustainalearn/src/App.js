@@ -2,7 +2,7 @@ import './App.css';
 import NavBar from "./NavBar";
 import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
-import Article from "./pages/Article";
+import Pages from "./pages/Pages";
 import Submission from "./pages/Submission";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './styles.css'
@@ -21,7 +21,7 @@ function App() {
                     <Routes>
                         <Route path={"/"} element={<Search />} />
                         <Route path={"/submission"} element={<Submission />} />
-                        <Route path={"/articles"} element={<Article />} />
+                        <Route path={"/pages"} element={<Pages />} />
                     </Routes>
                 </div>
             </div>

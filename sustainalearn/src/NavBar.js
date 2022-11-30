@@ -8,7 +8,7 @@ function NavBar() {
             <a href="/submission">
                 <button type="button" class="button"> Submit an Article! </button>
             </a>
-            <a href="/articles">
+            <a href="/Pages.js">
                 <button type="button" class="button"> Articles </button>
             </a>
             <a href="/">
