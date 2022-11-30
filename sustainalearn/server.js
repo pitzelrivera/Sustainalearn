@@ -142,6 +142,14 @@ app.post("/api/deletePost/:id", (req, res) => {
         "DELETE FROM userpost WHERE id = ?";
     db.query(sqlDelete, id, (err, result) => {
         if (err) { console.log(err) }
+        else {
+            const sqlUpdate =
+                "UPDATE article SET posts = posts - 1 WHERE id = ?";
+            db.query(sqlUpdate, articleID, (err1, result1) => {
+                if (err1) { console.log(err1) }
+                console.log(result1);
+            });
+        }
         console.log(result);
     });
 });

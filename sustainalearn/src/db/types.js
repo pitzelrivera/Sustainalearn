@@ -21,7 +21,7 @@ class Post {
     }
 }
 
-class Article {
+class ArticleInfo {
     constructor(id, title, content, source, doi, references, enteredAt, publishedAt, view, posts) {
         this.id = id;
         this.title = title;
@@ -50,4 +50,4 @@ class ArticleTag {
     }
 }
 
-module.exports = { User, Post, Article, Tag, ArticleTag };
+module.exports = { User, Post, ArticleInfo, Tag, ArticleTag };
