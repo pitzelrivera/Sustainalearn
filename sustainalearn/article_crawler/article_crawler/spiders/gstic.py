@@ -11,7 +11,7 @@ class GsticPySpider(CrawlSpider):
     start_urls = ['https://www.gstic.org/news/energy/']
 
     custom_settings={
-        'FEED_URI': 'sdg-action_articles.json',
+        'FEED_URI': 'articles.json',
         'FEED_FORMAT': 'json'
     }
 
@@ -21,9 +21,9 @@ class GsticPySpider(CrawlSpider):
         article = Article()
 
         author = response.xpath('//h3[@class="text-sm"]/text()').get()
-        content = response.xpath('//div[@class="blocks"]/p/text()').getall()
+        content = response.xpath('//div[@class="blocks"]//*[self::p or self::li or self::h2]/text()').getall()
 
-        if author == None or content == None:
+        if author == None or not content:
             pass
 
         article['title'] = response.xpath('//title/text()').get()
