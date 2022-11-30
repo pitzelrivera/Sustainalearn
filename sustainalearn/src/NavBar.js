@@ -8,14 +8,14 @@ function NavBar() {
             <a href="/submission">
                 <button type="button" class="button"> Submit an Article! </button>
             </a>
-            <a href="/Pages.js">
+            <a href="/pages">
                 <button type="button" class="button"> Articles </button>
             </a>
             <a href="/">
-                <button type="button" class="button"> Home </button>
+                <button class="button"> Home </button>
             </a>
             <a href="/about">
-                <button type="button" class="button"> About Us </button>
+                <button class="button"> About Us </button>
             </a>
 	    <Login/>
         </div>

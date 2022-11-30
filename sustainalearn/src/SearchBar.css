@@ -1,0 +1,110 @@
+
+
+.searchinput {
+    /*outline: none;*/
+    width: 200px;
+    height: 45px;
+    padding-left: 15px;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: black;
+    border: 0;
+    border-radius: 22px;
+    /*border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;*/
+}
+
+.articleLink {
+    text-decoration: none;
+}
+
+.dataResults {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 10px;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.dataTable {
+    background-color: transparent;
+}
+
+.articleButton {
+    background-color: white;
+    outline: 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    border-radius: 8px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+    .articleButton:hover {
+        background-color: #d9d9d9;
+    }
+
+.Title {
+    width: 160px;
+    height: 20px;
+    background-color: transparent;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Content {
+    width: 280px;
+    height: 20px;
+    background-color: transparent;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Source {
+    width: 160px;
+    height: 20px;
+    background-color: transparent;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.searchbutton {
+    background-color: #d5e2f7;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: black;
+    outline: 0;
+    border: none;
+    width: 80px;
+    height: 50px;
+    /*box-sizing: border-box;*/
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+    .searchbutton:hover {
+        background-color: #a3b1c7;
+    }
+
+    .searchbutton:active {
+        color: #999999;
+    }
