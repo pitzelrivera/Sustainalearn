@@ -7,7 +7,29 @@ function removeDuplicates(array, property) {
     })
 }
 
-async function tagHelper(tag) {
+async function searchHelper(tag) {
+    // Fetch articles with content containing the word
+    var articleArray = [];
+    url = "http://localhost:3001/api/getArticleKeyword/" + tag;
+
+    const result1 = await Axios.get(url)
+        .then((response) => {
+            articleArray.push(response.data);
+        })
+    copy = articleArray;
+    articleArray = _.flatten(copy);
+
+    //Fetch articles with titles containing the word
+    url = "http://localhost:3001/api/getArticleTitleKeyword/" + tag;
+
+    const result2 = await Axios.get(url)
+        .then((response) => {
+            articleArray.push(response.data);
+        })
+    copy = articleArray;
+    articleArray = _.flatten(copy);
+    articleArray = removeDuplicates(articleArray, 'id');
+
     // Fetch tags that match input
     var tagArray;
     var url = "http://localhost:3001/api/getTag/" + tag;
@@ -15,11 +37,11 @@ async function tagHelper(tag) {
         .then((response) => {
             tagArray = (response.data);
         })
-    console.log("tagArray: ");
-    console.log(tagArray);
+    //console.log("tagArray: ");
+    //console.log(tagArray);
 
     if (tagArray.length === 0) {
-        return [];
+        return articleArray;
     }
 
     // Fetch all article/tag pairs of found tags
@@ -36,23 +58,17 @@ async function tagHelper(tag) {
     }
     var copy = articletagArray;
     articletagArray = _.flatten(copy);
-    console.log("articletagArray: ");
-    console.log(articletagArray);
+    //console.log("articletagArray: ");
+    //console.log(articletagArray);
 
     if (articletagArray.length === 0) {
-        return [];
+        return articleArray;
     }
 
     // Fetch all matching articles
     var articleArray = [];
     for (let i = 0; i < articletagArray.length; i++) {
-        console.log("i = " + i);
-        console.log(articletagArray[i]);
-        console.log("articletagArray[i].articleID: ");
-        console.log(articletagArray[i].articleID);
-
         url = "http://localhost:3001/api/getArticle/" + (articletagArray[i].articleID).toString();
-        console.log(url);
 
         const result = await Axios.get(url)
             .then((response) => {
@@ -61,11 +77,11 @@ async function tagHelper(tag) {
     }
     var copy = articleArray;
     articleArray = _.flatten(copy);
-    console.log("articleArray: ");
-    console.log(articleArray);
+    //console.log("articleArray: ");
+    //console.log(articleArray);
 
     articleArray = removeDuplicates(articleArray, 'id');
     return articleArray;
 }
 
-module.exports = { removeDuplicates, tagHelper };
+module.exports = { removeDuplicates, searchHelper };
