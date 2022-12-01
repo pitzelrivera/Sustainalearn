@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('./db/config')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { User, Post, Article, Tag, ArticleTag } = require('./db/types')
+const { User, Post, ArticleInfo, Tag, ArticleTag } = require('./db/types')
 //const Axios = require ('axios')
 //const { useState } = require('react')
 //const _ = require('lodash')
@@ -176,7 +176,7 @@ app.get("/api/getArticle/:id", /*async*/ (req, res) => {
     const sqlSelect =
         "SELECT * FROM article WHERE id = ?";
     db.query(sqlSelect, id, (err, result) => {
-        articleArray = makeArticles(result);
+        let articleArray = makeArticles(result);
         console.log(articleArray);
         res.send(articleArray);
     });
@@ -231,13 +231,13 @@ app.get("/api/getArticlesPopular", async (req, res) => {
 
 // Route to create an article
 app.post("/api/createArticle", (req, res) => {
-    const title = req.body.Article.title;
-    const content = req.body.Article.content;
-    const source = req.body.Article.source;
-    const doi = req.body.Article.doi;
-    const references = req.body.Article.references;
-    const publishedAt = req.body.Article.publishedAt;
-    const view = req.body.Article.view;
+    const title = req.body.ArticleInfo.title;
+    const content = req.body.ArticleInfo.content;
+    const source = req.body.ArticleInfo.source;
+    const doi = req.body.ArticleInfo.doi;
+    const references = req.body.ArticleInfo.references;
+    const publishedAt = req.body.ArticleInfo.publishedAt;
+    const view = req.body.ArticleInfo.view;
     const posts = 0;
     var date = new Date();
     const enteredAt = date.toISOString().slice(0, 19).replace('T', ' ');
@@ -460,7 +460,7 @@ function makeArticles(result) {
         const publishedAt = result[i].publishedAt;
         const view = result[i].view
         const posts = result[i].posts
-        articleArray.push(new Article(id, title, content, source, doi, references, enteredAt, publishedAt, view, posts));
+        articleArray.push(new ArticleInfo(id, title, content, source, doi, references, enteredAt, publishedAt, view, posts));
     }
     return articleArray;
 }

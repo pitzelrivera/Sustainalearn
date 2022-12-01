@@ -4,6 +4,7 @@ import Axios from 'axios'
 import { User, Post, Article, Tag, ArticleTag } from "../db/types";
 import readError from "../db/errorHandle";
 import SearchBar from "../SearchBar"
+import './Search.css'
 
 const Search = () => {
 
@@ -50,7 +51,7 @@ const Search = () => {
     };
 
     return (
-        <>
+        <div className="search">
             <h1>Search</h1>
             <>
                 <label> userID </label>
@@ -111,7 +112,7 @@ const Search = () => {
                 <SearchBar/>
 
             </>
-        </>
+        </div>
     )
 }
 

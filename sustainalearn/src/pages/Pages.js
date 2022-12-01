@@ -3,27 +3,41 @@ import App from "../App";
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import Axios from 'axios'
-import { User, Post, Article, Tag, ArticleTag } from "../db/types";
+import { User, Post, ArticleInfo, Tag, ArticleTag } from "../db/types";
 import readError from "../db/errorHandle";
-
-const DUMMY_DATA = [
-    {
-        senderId: "perborgen",
-        text: "who'll win?"
-    },
-    {
-        senderId: "janedoe",
-        text: "who'll win?"
-    }
-]
+import './Pages.css';
 
 const Pages = () => {
-        const { id } = useParams();
-        return (
-            <div>
-                <h1>This is the Article Page for page: {id}</h1>
+    Axios.get("http://localhost:3001/api/getArticle/1")
+        .then(result => {
+            console.log(result.data);
+        });
+
+    return (
+        <div>
+            <h2>Article Page!</h2>
+            <div className = "parent">
+                <div className= "article">
+                    something here
+                </div>
+                <div className="posts">
+                    something else here
+                </div>
             </div>
-        )
-}
+            <div>
+                <body>
+                    more content here below<br/>
+                    a lot<br/>
+                    .<br/>
+                    .<br/>
+                    .<br/>
+                    .
+                    .
+                    more
+                </body>
+            </div>
+        </div>
+    )
+};
 
 export default Pages;

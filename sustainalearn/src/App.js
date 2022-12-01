@@ -13,16 +13,18 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="Sustainalearn"
-                 style = {{backgroundImage: `url(${backgroundImg})` }}>
-                <NavBar/>
-                <h1>Sustainalearn</h1>
-                <div id="page-body">
-                    <Routes>
-                        <Route path={"/"} element={<Search />} />
-                        <Route path={"/submission"} element={<Submission />} />
-                        <Route path={"/pages/:id"} element={<Pages />} />
-                    </Routes>
+            <div>
+                <div className="Sustainalearn"
+                     style = {{backgroundImage: `url(${backgroundImg})` }}>
+                    <NavBar/>
+                    <h1>Sustainalearn</h1>
+                    <div id="page-body">
+                        <Routes>
+                            <Route path={"/"} element={<Search />} />
+                            <Route path={"/submission"} element={<Submission />} />
+                            <Route path={"/pages/"} element={<Pages />} />
+                        </Routes>
+                    </div>
                 </div>
             </div>
         </BrowserRouter>
