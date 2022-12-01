@@ -8,17 +8,24 @@ import readError from "../db/errorHandle";
 import './Pages.css';
 
 const Pages = () => {
-    Axios.get("http://localhost:3001/api/getArticle/1")
-        .then(result => {
-            console.log(result.data);
-        });
+    const [article, setArticle] = useState([]);
+    const { id } = useParams();
+    const url = "http://localhost:3001/api/getArticle/" + id.toString();
+    React.useEffect(() => {
+        Axios.get(url)
+            .then(result => {
+                setArticle(result.data);
+            })}, [])
+    const doc = article.at(0);
 
     return (
         <div>
             <h2>Article Page!</h2>
             <div className = "parent">
                 <div className= "article">
-                    something here
+                    <body>
+                    {doc.title}
+                    </body>
                 </div>
                 <div className="posts">
                     something else here
