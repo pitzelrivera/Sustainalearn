@@ -2,9 +2,11 @@
   text-align: center;
   
   color: white;
-  height: 100vh;
+  height: 100%;
   width: auto;
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-origin: content-box;
 }

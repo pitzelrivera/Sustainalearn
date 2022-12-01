@@ -1,0 +1,18 @@
+.parent {
+    display: flex;
+}
+
+.article {
+    flex: 2;
+    margin-right: 10%;
+    margin-left: 2%;
+    background-color: white;
+    color: black;
+    height: 500px;
+}
+
+.posts {
+    flex: 1;
+    border: 1px solid red;
+    margin-right: 2%;
+}
