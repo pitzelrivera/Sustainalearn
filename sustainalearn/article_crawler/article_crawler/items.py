@@ -13,4 +13,5 @@ class Article(scrapy.Item):
     url = scrapy.Field()
     content = scrapy.Field()
     doi = scrapy.Field()
+    id = scrapy.Field()
 
