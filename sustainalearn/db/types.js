@@ -22,9 +22,10 @@ class Post {
 }
 
 class ArticleInfo {
-    constructor(id, title, content, source, doi, references, enteredAt, publishedAt, view, posts) {
+    constructor(id, title, author, content, source, doi, references, enteredAt, publishedAt, view, posts) {
         this.id = id;
         this.title = title;
+        this.author = author;
         this.content = content;
         this.source = source;
         this.doi = doi;
