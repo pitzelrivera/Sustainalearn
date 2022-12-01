@@ -22,7 +22,7 @@ function App() {
                         <Routes>
                             <Route path={"/"} element={<Search />} />
                             <Route path={"/submission"} element={<Submission />} />
-                            <Route path={"/pages/"} element={<Pages />} />
+                            <Route path={"/pages/:id"} element={<Pages />} />
                         </Routes>
                     </div>
                 </div>
