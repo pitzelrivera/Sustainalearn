@@ -185,7 +185,6 @@ app.get("/api/getArticle/:id", async (req, res) => {
 
 // Route to get an article content by keyword
 app.get("/api/getArticleKeyword/:keyword", (req, res) => {
->>>>>>> 62c11c90d291dc8fc99fe07787bc1e759bd4d7dd
     const keyword = "%" + req.params.keyword + "%";
 
     const sqlSelect =

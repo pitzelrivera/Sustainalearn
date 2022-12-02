@@ -9,19 +9,22 @@ import './Pages.css';
 
 const Pages = () => {
 
+    const {id} = useParams();
     const [postList, setPostList] = useState([])
     const [articleList, setArticleList] = useState([])
+    const articleUrl = "http://localhost:3001/api/getArticle/" + id.toString();
+    const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
 
     useEffect(() => {
         console.log("PAGE LOADED");
 
         const getData = async () => {
-            const res1 = await Axios.get("http://localhost:3001/api/getArticle/1")
+            const res1 = await Axios.get(articleUrl)
                 .then(response => {
                     setArticleList(response.data);
                 });
 
-            const res2 = await Axios.get("http://localhost:3001/api/getArticlePosts/1")
+            const res2 = await Axios.get(postsUrl)
                 .then(response => {
                     setPostList(response.data);
                 });
@@ -35,9 +38,9 @@ const Pages = () => {
         <div>
             <h2>Article Page!</h2>
             <div className="parent">
-                {articleList.length > 0 && articleList.map(info =>
+                {articleList.length > 0 && articleList.map(doc =>
                     <div className="article">
-                        Title: {info.title}
+                        <div className={"title"}>{doc.title}</div>
                     </div>
                 )}
                 <div className="posts">
