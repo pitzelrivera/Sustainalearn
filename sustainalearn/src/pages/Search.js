@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { useState } from 'react';
 import Axios from 'axios'
-import { User, Post, Article, Tag, ArticleTag } from "../db/types";
+import { User, Post, ArticleInfo, Tag, ArticleTag } from "../db/types";
 import readError from "../db/errorHandle";
 import SearchBar from "../SearchBar"
 import './Search.css'
+
+var articleList = [];
+var postList = [];
 
 const Search = () => {
 

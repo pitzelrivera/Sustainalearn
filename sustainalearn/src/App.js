@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 import Pages from "./pages/Pages";
 import Submission from "./pages/Submission";
+import About from "./pages/About";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './styles.css'
 import backgroundImg from "./images/background.png"
@@ -22,7 +23,8 @@ function App() {
                         <Routes>
                             <Route path={"/"} element={<Search />} />
                             <Route path={"/submission"} element={<Submission />} />
-                            <Route path={"/pages/"} element={<Pages />} />
+                            <Route path={"/pages/:id"} element={<Pages />} />
+                            <Route path={"/about"} element={<About />} />
                         </Routes>
                     </div>
                 </div>
