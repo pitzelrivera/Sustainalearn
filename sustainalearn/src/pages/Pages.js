@@ -39,7 +39,16 @@ const Pages = () => {
             <div className="parent">
                 {articleList.length > 0 && articleList.map(doc =>
                     <div className="article">
-                        <div className={"title"}>{doc.title}</div>
+                        <div className={"title"}>
+                            {doc.title}
+                            <div className={"author"}>
+                                {doc.author}
+                            </div>
+                        </div>
+                        <div className={"content"}>
+                            <br/>
+                            {doc.content}
+                        </div>
                     </div>
                 )}
                 <div className="posts">

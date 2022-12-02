@@ -9,6 +9,23 @@
     background-color: white;
     color: black;
     height: 500px;
+    overflow-y: scroll;
+}
+
+.title {
+    font-family: "Times New Roman";
+    font-size: x-large;
+}
+
+.author {
+    font-size: smaller;
+}
+
+.content {
+    font-family: "Times New Roman";
+    text-align: left;
+    font-size: large;
+    white-space: pre-wrap;
 }
 
 .posts {
