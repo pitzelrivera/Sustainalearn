@@ -216,14 +216,14 @@ app.get("/api/getArticleByTag/:tag", async (req, res) => {
     res.send(articleArray);
 })
 
-// Route to get most recent(ly entered into our system) articles
+// Route to get most recent articles
 app.get("/api/getArticlesRecent", async (req, res) => {
     //const count = req.params.count;
 
     // Only hardcoded limit works.
 
     const sqlSelect =
-        "SELECT * FROM article ORDER BY enteredAt DESC LIMIT 5";
+        "SELECT * FROM article ORDER BY publishedAt DESC LIMIT 5";
     db.query(sqlSelect, /*count,*/ (err, result) => {
         articleArray = makeArticles(result);
         console.log(articleArray);

@@ -55,61 +55,6 @@ const Search = () => {
 
     return (
         <div className="search">
-            <h1>Search</h1>
-            <>
-                <label> userID </label>
-                <input
-                    type="number"
-                    name="userID"
-                    onChange={(e) => { setUserID(e.target.value);
-                    }}
-                />
-
-                <label> username </label>
-                <input
-                    type="text"
-                    name="username"
-                    onChange={(e) => {
-                        setUsername(e.target.value);
-                    }}
-                />
-
-                <label> articleID </label>
-                <input
-                    type="number"
-                    name="articleID"
-                    onChange={(e) => {
-                        setArticleID(e.target.value);
-                    }}
-                />
-
-                <label> parentID </label>
-                <input
-                    type="number"
-                    name="parentID"
-                    onChange={(e) => {
-                        setParentID(e.target.value);
-                    }}
-                />
-
-                <label> message </label>
-                <input
-                    type="text"
-                    name="message"
-                    onChange={(e) => {
-                        setMessage(e.target.value);
-                    }}
-                />
-
-                <label> highlight </label>
-                <input
-                    type="text"
-                    name="highlight"
-                    onChange={(e) => {
-                        setHighlight(e.target.value);
-                    }}
-                />
-            </>
             <button onClick={submitPost}> Submit </button>
             <>
                 <SearchBar/>
