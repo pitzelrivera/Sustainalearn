@@ -23,9 +23,7 @@ const Pages = () => {
             <h2>Article Page!</h2>
             <div className = "parent">
                 <div className= "article">
-                    <body>
-                    {doc.title}
-                    </body>
+                    <h2 className={"articleTitle"}>{doc.title}</h2>
                 </div>
                 <div className="posts">
                     something else here
