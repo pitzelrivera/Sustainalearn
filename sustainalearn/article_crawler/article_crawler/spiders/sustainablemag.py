@@ -2,7 +2,7 @@ import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from article_crawler.items import Article
-import json
+from datetime import datetime
 
 
 class SustainablemagSpider(CrawlSpider):
@@ -29,7 +29,7 @@ class SustainablemagSpider(CrawlSpider):
         article['author'] = "By " + response.xpath('//div[@class="ArticleHeader_Details__3n5Er"]/div[@class="Type_m-body2__3AsD- Type_d-body3__24mDH Type_medium__2avgC"]/text()').getall()[1]
         article['content'] = response.xpath('//div[@class="Prose_Prose__2zaJW"]//*[self::p or self::li or self::h2]/text()').getall()
         article['url'] = response.url
-        article['date'] = response.xpath('//div[@class="Type_m-body2__3AsD- Type_d-body3__24mDH Type_medium__2avgC"]/text()').get()
+        article['date'] = datetime.strptime(response.xpath('//div[@class="Breadcrumbs_Breadcrumbs__3yIKi"]/div[@class="Breadcrumbs_Crumb__aBP5K"]/div[@class="Type_m-body2__3AsD- Type_d-body3__24mDH Type_medium__2avgC"]/text()').get(), '%B %d, %Y')
        #article['id'] = id + 1
 
 

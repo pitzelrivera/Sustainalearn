@@ -6,7 +6,7 @@ const { User, Post, ArticleInfo, Tag, ArticleTag } = require('./db/types')
 //const Axios = require ('axios')
 //const { useState } = require('react')
 //const _ = require('lodash')
-const { removeDuplicates, tagHelper } = require('./db/helpers')
+const { removeDuplicates, searchHelper } = require('./db/helpers')
 
 const app = express();
 app.use(cors());
@@ -182,8 +182,10 @@ app.get("/api/getArticle/:id", async (req, res) => {
     });
 })
 
-// Route to get an article by keyword
-app.get("/api/getArticleKeyword/:keyword", async (req, res) => {
+
+// Route to get an article content by keyword
+app.get("/api/getArticleKeyword/:keyword", (req, res) => {
+>>>>>>> 62c11c90d291dc8fc99fe07787bc1e759bd4d7dd
     const keyword = "%" + req.params.keyword + "%";
 
     const sqlSelect =
@@ -195,9 +197,22 @@ app.get("/api/getArticleKeyword/:keyword", async (req, res) => {
     });
 })
 
+// Route to get an article title by keyword
+app.get("/api/getArticleTitleKeyword/:keyword", (req, res) => {
+    const keyword = "%" + req.params.keyword + "%";
+
+    const sqlSelect =
+        "SELECT * FROM article WHERE title LIKE ?";
+    db.query(sqlSelect, keyword, (err, result) => {
+        articleArray = makeArticles(result);
+        console.log(articleArray);
+        res.send(articleArray);
+    });
+})
+
 // Route to get an article by tag (NORMAL SEARCH)
 app.get("/api/getArticleByTag/:tag", async (req, res) => {
-    articleArray = await tagHelper(req.params.tag);
+    articleArray = await searchHelper(req.params.tag);
     //console.log("FINAL ARTICLE ARRAY: ", articleArray);
     res.send(articleArray);
 })
@@ -232,6 +247,7 @@ app.get("/api/getArticlesPopular", async (req, res) => {
 // Route to create an article
 app.post("/api/createArticle", async (req, res) => {
     const title = req.body.ArticleInfo.title;
+    const author = req.body.ArticleInfo.author;
     const content = req.body.ArticleInfo.content;
     const source = req.body.ArticleInfo.source;
     const doi = req.body.ArticleInfo.doi;
@@ -243,8 +259,8 @@ app.post("/api/createArticle", async (req, res) => {
     const enteredAt = date.toISOString().slice(0, 19).replace('T', ' ');
 
     const sqlInsert =
-        "INSERT INTO article (title, content, source, doi, references, enteredAt, publishedAt, view, posts) VALUES (?,?,?,?,?,?,?,?,?)";
-    db.query(sqlInsert, [title, content, source, doi, references, enteredAt, publishedAt, view, posts], (err, result) => {
+        "INSERT INTO article (title, content, source, doi, enteredAt, publishedAt, view, posts) VALUES (?,?,?,?,?,?,?,?)";
+    db.query(sqlInsert, [title, content, source, doi, enteredAt, publishedAt, view, posts], (err, result) => {
         if (err) {
             console.log(err);
             res.send(err);
@@ -452,6 +468,7 @@ function makeArticles(result) {
     for (i = 0; i < result.length; i++) {
         const id = result[i].id;
         const title = result[i].title;
+        const author = result[i].author;
         const content = result[i].content;
         const source = result[i].source;
         const doi = result[i].doi;
@@ -460,7 +477,7 @@ function makeArticles(result) {
         const publishedAt = result[i].publishedAt;
         const view = result[i].view
         const posts = result[i].posts
-        articleArray.push(new ArticleInfo(id, title, content, source, doi, references, enteredAt, publishedAt, view, posts));
+        articleArray.push(new ArticleInfo(id, title, author, content, source, doi, references, enteredAt, publishedAt, view, posts));
     }
     return articleArray;
 }
