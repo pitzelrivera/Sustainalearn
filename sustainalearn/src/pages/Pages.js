@@ -1,31 +1,47 @@
 import React, { Component } from 'react';
 import App from "../App";
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Axios from 'axios'
 import { User, Post, ArticleInfo, Tag, ArticleTag } from "../db/types";
 import readError from "../db/errorHandle";
 import './Pages.css';
 
 const Pages = () => {
-    const [article, setArticle] = useState([]);
-    const { id } = useParams();
-    const url = "http://localhost:3001/api/getArticle/" + id.toString();
-    React.useEffect(() => {
-        Axios.get(url)
-            .then(result => {
-                setArticle(result.data);
-                console.log(result.data);
-            })}, [])
-    const doc = article.at(0);
+    const {id} = useParams();
+    const [postList, setPostList] = useState([])
+    const [articleList, setArticleList] = useState([])
+    const articleUrl = "http://localhost:3001/api/getArticle/" + id.toString();
+    const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
+
+    useEffect(() => {
+        console.log("PAGE LOADED");
+
+        const getData = async () => {
+            const res1 = await Axios.get(articleUrl)
+                .then(response => {
+                    setArticleList(response.data);
+                });
+
+            const res2 = await Axios.get(postsUrl)
+                .then(response => {
+                    setPostList(response.data);
+                });
+        }
+        getData();
+
+    }, []);
+
 
     return (
         <div>
             <h2>Article Page!</h2>
-            <div className = "parent">
-                <div className= "article">
-                    <div className={"docTitle"}>{doc.title}</div>
-                </div>
+            <div className="parent">
+                {articleList.length > 0 && articleList.map(doc =>
+                    <div className="article">
+                        <div className={"title"}>{doc.title}</div>
+                    </div>
+                )}
                 <div className="posts">
                     something else here
                 </div>

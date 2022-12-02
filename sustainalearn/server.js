@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 ///////////////////////////////// USER ROUTES /////////////////////////////////
 
 // Route to get all users
-app.get("/api/getUsers", (req, res) => {
+app.get("/api/getUsers", async (req, res) => {
     const sqlSelect =
         "SELECT * FROM user";
     db.query(sqlSelect, (err, result) => {
@@ -27,7 +27,7 @@ app.get("/api/getUsers", (req, res) => {
 })
 
 // Route to get a user
-app.get("/api/getUser/:id", (req, res) => {
+app.get("/api/getUser/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlSelect =
@@ -40,7 +40,7 @@ app.get("/api/getUser/:id", (req, res) => {
 })
 
 // Route to create a user
-app.post("/api/createUser", (req, res) => {
+app.post("/api/createUser", async (req, res) => {
     const id = req.body.User.id;
     const username = req.body.User.username;
     const email= req.body.User.email;
@@ -59,7 +59,7 @@ app.post("/api/createUser", (req, res) => {
 });
 
 // Route to delete a user
-app.post("/api/deleteUser/:id", (req, res) => {
+app.post("/api/deleteUser/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlDelete =
@@ -75,7 +75,7 @@ app.post("/api/deleteUser/:id", (req, res) => {
 ///////////////////////////////// POST ROUTES /////////////////////////////////
 
 // Route to get all posts on an article
-app.get("/api/getArticlePosts/:id", (req, res) => {
+app.get("/api/getArticlePosts/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlSelect =
@@ -89,7 +89,7 @@ app.get("/api/getArticlePosts/:id", (req, res) => {
 });
 
 // Route to like a post
-app.post("/api/likePost/:id", (req, res) => {
+app.post("/api/likePost/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlUpdate =
@@ -101,7 +101,7 @@ app.post("/api/likePost/:id", (req, res) => {
 });
 
 // Route to create a post on an article
-app.post("/api/createPost", (req, res) => {
+app.post("/api/createPost", async (req, res) => {
     const userID = req.body.Post.userID;
     const username = req.body.Post.username;
     const articleID = req.body.Post.articleID;
@@ -135,7 +135,7 @@ app.post("/api/createPost", (req, res) => {
 });
 
 // Route to delete a post
-app.post("/api/deletePost/:id", (req, res) => {
+app.post("/api/deletePost/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlDelete =
@@ -159,7 +159,7 @@ app.post("/api/deletePost/:id", (req, res) => {
 //////////////////////////////// ARTICLE ROUTES ///////////////////////////////
 
 // Route to get all articles
-app.get("/api/getArticles", (req, res) => {
+app.get("/api/getArticles", async (req, res) => {
     const sqlSelect =
         "SELECT * FROM article";
     db.query(sqlSelect, (err, result) => {
@@ -170,7 +170,7 @@ app.get("/api/getArticles", (req, res) => {
 })
 
 // Route to get an article by ID
-app.get("/api/getArticle/:id", /*async*/ (req, res) => {
+app.get("/api/getArticle/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlSelect =
@@ -181,6 +181,7 @@ app.get("/api/getArticle/:id", /*async*/ (req, res) => {
         res.send(articleArray);
     });
 })
+
 
 // Route to get an article content by keyword
 app.get("/api/getArticleKeyword/:keyword", (req, res) => {
@@ -243,7 +244,7 @@ app.get("/api/getArticlesPopular", async (req, res) => {
 })
 
 // Route to create an article
-app.post("/api/createArticle", (req, res) => {
+app.post("/api/createArticle", async (req, res) => {
     const title = req.body.ArticleInfo.title;
     const author = req.body.ArticleInfo.author;
     const content = req.body.ArticleInfo.content;
@@ -268,7 +269,7 @@ app.post("/api/createArticle", (req, res) => {
 });
 
 // Route to delete an article
-app.post("/api/deleteArticle/:id", (req, res) => {
+app.post("/api/deleteArticle/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlDelete =
@@ -284,7 +285,7 @@ app.post("/api/deleteArticle/:id", (req, res) => {
 ////////////////////////////////// TAG ROUTES /////////////////////////////////
 
 // Route to get all tags
-app.get("/api/getTags", (req, res) => {
+app.get("/api/getTags", async (req, res) => {
     const sqlSelect =
         "SELECT * FROM tag";
     db.query(sqlSelect, (err, result) => {
@@ -295,12 +296,12 @@ app.get("/api/getTags", (req, res) => {
 })
 
 // Route to get a tag by id
-app.get("/api/getTagID/:id", (req, res) => {
+app.get("/api/getTagID/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlSelect =
         "SELECT * FROM tag WHERE id = ?";
-    db.query(sqlSelect, id, (err, result) => {
+    db.query(sqlSelect, id, async (err, result) => {
         tagArray = makeTags(result);
         console.log(tagArray);
         res.send(tagArray);
@@ -308,7 +309,7 @@ app.get("/api/getTagID/:id", (req, res) => {
 })
 
 // Route to get tags by word
-app.get("/api/getTag/:tag", /*async*/ (req, res) => {
+app.get("/api/getTag/:tag", async (req, res) => {
     const tag = "%" + req.params.tag + "%"
 
     const sqlSelect =
@@ -321,7 +322,7 @@ app.get("/api/getTag/:tag", /*async*/ (req, res) => {
 })
 
 // Route to create a tag
-app.post("/api/createTag", (req, res) => {
+app.post("/api/createTag", async (req, res) => {
     const id = req.body.Tag.id;
     const tag = req.body.Tag.tag;
 
@@ -337,7 +338,7 @@ app.post("/api/createTag", (req, res) => {
 });
 
 // Route to delete a tag by id
-app.post("/api/deleteTagID/:id", (req, res) => {
+app.post("/api/deleteTagID/:id", async (req, res) => {
     const id = req.params.id;
 
     const sqlDelete =
@@ -349,7 +350,7 @@ app.post("/api/deleteTagID/:id", (req, res) => {
 });
 
 // Route to delete a tag by word
-app.post("/api/deleteTag/:tag", (req, res) => {
+app.post("/api/deleteTag/:tag", async (req, res) => {
     const tag = req.params.tag;
 
     const sqlDelete =
@@ -365,7 +366,7 @@ app.post("/api/deleteTag/:tag", (req, res) => {
 ////////////////////////////// ARTICLETAG ROUTES //////////////////////////////
 
 // Route to get all articletags
-app.get("/api/getArticleTags", (req, res) => {
+app.get("/api/getArticleTags", async (req, res) => {
     const sqlSelect =
         "SELECT * FROM articletag";
     db.query(sqlSelect, (err, result) => {
@@ -389,7 +390,7 @@ app.get("/api/getArticleTagsAID/:id", async (req, res) => {
 })
 
 // Route to get all of an tag's articles
-app.get("/api/getArticleTagsTID/:id", /*async*/ (req, res) => {
+app.get("/api/getArticleTagsTID/:id", async (req, res) => {
     const tagID = req.params.id;
 
     const sqlSelect =
@@ -402,7 +403,7 @@ app.get("/api/getArticleTagsTID/:id", /*async*/ (req, res) => {
 })
 
 // Route to create an articletag relation
-app.post("/api/createArticleTag", (req, res) => {
+app.post("/api/createArticleTag", async (req, res) => {
     const articleID = req.body.ArticleTag.articleID;
     const tagID = req.body.ArticleTag.tagID;
 
@@ -418,7 +419,7 @@ app.post("/api/createArticleTag", (req, res) => {
 });
 
 // Route to delete an articletag relation
-app.post("/api/deleteArticleTag", (req, res) => {
+app.post("/api/deleteArticleTag", async (req, res) => {
     const articleID = req.body.ArticleTag.articleID;
     const tagID = req.body.ArticleTag.tagID;
 
