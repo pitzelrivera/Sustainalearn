@@ -15,6 +15,7 @@ const Pages = () => {
         Axios.get(url)
             .then(result => {
                 setArticle(result.data);
+                console.log(result.data);
             })}, [])
     const doc = article.at(0);
 
@@ -23,7 +24,7 @@ const Pages = () => {
             <h2>Article Page!</h2>
             <div className = "parent">
                 <div className= "article">
-                    <h2 className={"articleTitle"}>{doc.title}</h2>
+                    <div className={"docTitle"}>{doc.title}</div>
                 </div>
                 <div className="posts">
                     something else here
