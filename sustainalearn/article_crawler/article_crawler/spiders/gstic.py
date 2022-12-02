@@ -2,7 +2,7 @@ import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from article_crawler.items import Article
-import json
+from datetime import datetime
 
 
 class GsticPySpider(CrawlSpider):
@@ -30,7 +30,7 @@ class GsticPySpider(CrawlSpider):
         article['author'] = "By " + author
         article['content'] = content
         article['url'] = response.url
-        article['date'] = response.xpath('//time[@class="post__date"]/text()').get()
+        article['date'] = datetime.strptime(response.xpath('//time[@class="post__date"]/text()').get().strip(), '%d %B %Y')
 
 
         return article
