@@ -4,7 +4,7 @@
 
 .article {
     flex: 2;
-    margin-right: 10%;
+    margin-right: 5%;
     margin-left: 2%;
     background-color: white;
     color: black;
@@ -28,8 +28,23 @@
     white-space: pre-wrap;
 }
 
-.posts {
+.chatBox {
     flex: 1;
-    border: 1px solid red;
+    border: 1px solid black;
     margin-right: 2%;
+    background-color: white;
+    height: 500px;
+    overflow-y: scroll;
+    color: black;
+}
+
+.chatTitle {
+    font-size: x-large;
+    background-color: #999999;
+    border-bottom: black 2px dotted;
+}
+
+.posts {
+    text-align: center;
+    font-size: medium;
 }

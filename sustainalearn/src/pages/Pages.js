@@ -51,8 +51,18 @@ const Pages = () => {
                         </div>
                     </div>
                 )}
-                <div className="posts">
-                    something else here
+                <div className={"chatBox"}>
+                    <div className={"chatTitle"}><b>Chat here!</b></div>
+                    {postList.length > 0 && postList.map(post =>
+                        <div className={"posts"}>
+                            <div className={"parentPost"}>
+                                <ul>{post.username}: {post.message}</ul>
+                            </div>
+                            <div className={"childContent"}>
+                                {post.message}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
             <div>
