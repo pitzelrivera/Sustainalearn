@@ -5,3 +5,17 @@
     font-size: 20px;
     border: 2px solid black;
 }
+
+.submitButton:disabled {
+    opacity: 70%;
+}
+
+.submissionForm {
+    width: 99%;
+    height: 85px;
+}
+
+textarea {
+    resize: none;
+    overflow-y: scroll;
+}

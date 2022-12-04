@@ -1,11 +1,13 @@
 import React, {Component, useEffect, useState} from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import Post from './Post'
+import Comment from './Post'
 import PostBox from "./PostBox";
 import './Posts.css'
+import readError from "../db/errorHandle";
+import {Post} from "../db/types";
 
-const Posts = ({ currentUserID }) => {
+const Posts = ({ currentUserID, articleID }) => {
     const [postList, setPostList] = useState([]);
     const { id } = useParams();
     const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
@@ -19,8 +21,25 @@ const Posts = ({ currentUserID }) => {
                 new Date(a.postedAt).getTime() - new Date(b.postedAt).getTime()
         );
     };
+
+
     const addPost = (message, parentID) => {
         console.log("addComment", message, parentID);
+        const newPost =
+            new Post(0, currentUserID, "admin", articleID, null, message,
+                "", 0, 0);
+        console.log("Making post!");
+        console.log(newPost);
+
+        const makePost = async (newPost) => {
+            Axios.post("http://localhost:3001/api/createPost", {Post: newPost})
+                .then(error => {
+                    setPostList([postList, newPost]);
+                    console.log(postList);
+                });
+        }
+        makePost(newPost);
+
     }
 
     useEffect(() => {
@@ -37,10 +56,9 @@ const Posts = ({ currentUserID }) => {
     return (
         <div className={"chatContainer"}>
             <div className={"posts"}>
-                This is the Posts
                 <div className={"postContainer"}>
                     {parentPosts.map((parent) => (
-                        <Post
+                        <Comment
                             key={parent.id}
                             post={parent}
                             replies={getReplies(parent.id)}

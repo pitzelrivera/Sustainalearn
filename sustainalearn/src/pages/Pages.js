@@ -33,21 +33,6 @@ const Pages = () => {
 
     }, []);
 
-    /*
-    function ChildPost(post, postList) {
-        const childPosts = null;
-        postList.map((child) => {
-           if (child.parentId === post.id) {
-               childPosts.push(child);
-               postList.delete(child);
-           }
-           console.log(childPosts);
-
-           return childPosts;
-        });
-    }
-     */
-
 
     return (
         <div>
@@ -70,7 +55,9 @@ const Pages = () => {
                 <div className={"chatBox"}>
                     <div className={"chatTitle"}><b>Chat here!</b></div>
                         <div className={"posts"}>
-                            <Posts currentUserID = "1" />
+                            {articleList.map(doc =>
+                                <Posts currentUserID = "1" articleID={doc.id} />
+                            )}
                         </div>
                 </div>
             </div>

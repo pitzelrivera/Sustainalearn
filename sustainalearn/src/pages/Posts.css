@@ -1,12 +1,14 @@
 .postForm {
     background-color: #999999;
-    height: 130px;
+    height: 20vh;
+    padding: 15px;
 }
 
 .postContainer {
     overflow-y: scroll;
+    padding-left: 10px;
 }
 
 .posts {
-    height: 345px;
+    height: 41vh;
 }

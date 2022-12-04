@@ -6,7 +6,7 @@ const Post = ({ post, replies }) => {
         <div className={"posts"}>
             <div className={"postContent"}>
                 <div className={"postAuthor"}>
-                    {post.username}: {post.postedAt}
+                    <b>{post.username}</b>: {post.postedAt}
                 </div>
             </div>
                 <div className={"postText"}>

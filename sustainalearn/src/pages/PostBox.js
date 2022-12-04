@@ -3,19 +3,21 @@ import './PostBox.css'
 
 const PostBox = ({handleSubmit, submitLabel}) => {
     const [message, setMessage] = useState("");
+    const isTextDisabled = message.length === 0;
     const onSubmit = event => {
-        event.preventDefault()
-        handleSubmit(message)
-    }
+        event.preventDefault();
+        handleSubmit(message);
+        setMessage("");
+    };
 
     return (
         <form onSubmit={onSubmit}>
             <textarea
                 className={"submissionForm"}
                 value={message}
-                onChang={(e) => setMessage(e.target.value)}
+                onChange={(e) => setMessage(e.target.value)}
             />
-            <button className={"submitButton"}>
+            <button className={"submitButton"} disabled={isTextDisabled}>
                 {submitLabel}
             </button>
         </form>
