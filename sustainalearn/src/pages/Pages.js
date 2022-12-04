@@ -6,6 +6,7 @@ import Axios from 'axios'
 import { User, Post, ArticleInfo, Tag, ArticleTag } from "../db/types";
 import readError from "../db/errorHandle";
 import './Pages.css';
+import Posts from "./Posts"
 
 const Pages = () => {
     const {id} = useParams();
@@ -32,6 +33,7 @@ const Pages = () => {
 
     }, []);
 
+    /*
     function ChildPost(post, postList) {
         const childPosts = null;
         postList.map((child) => {
@@ -44,6 +46,7 @@ const Pages = () => {
            return childPosts;
         });
     }
+     */
 
 
     return (
@@ -66,18 +69,9 @@ const Pages = () => {
                 )}
                 <div className={"chatBox"}>
                     <div className={"chatTitle"}><b>Chat here!</b></div>
-                    {postList.length > 0 && postList.map(post =>
                         <div className={"posts"}>
-                            <div className={"parentPost"}>
-                                <li>
-                                    {post.username}: {post.message}
-                                    <ul>
-                                        <li>Children will go here</li>
-                                    </ul>
-                                </li>
-                            </div>
+                            <Posts currentUserID = "1" />
                         </div>
-                    )}
                 </div>
             </div>
             <div>
