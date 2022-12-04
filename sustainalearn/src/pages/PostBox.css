@@ -1,0 +1,7 @@
+.submitButton {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0094ff;
+    size: portrait;
+    font-size: 20px;
+    border: 2px solid black;
+}

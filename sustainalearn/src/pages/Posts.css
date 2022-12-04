@@ -1,0 +1,12 @@
+.postForm {
+    background-color: #999999;
+    height: 130px;
+}
+
+.postContainer {
+    overflow-y: scroll;
+}
+
+.posts {
+    height: 345px;
+}

@@ -2,6 +2,8 @@ import React, {Component, useEffect, useState} from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
 import Post from './Post'
+import PostBox from "./PostBox";
+import './Posts.css'
 
 const Posts = ({ currentUserID }) => {
     const [postList, setPostList] = useState([]);
@@ -16,8 +18,10 @@ const Posts = ({ currentUserID }) => {
             .sort((a, b) =>
                 new Date(a.postedAt).getTime() - new Date(b.postedAt).getTime()
         );
+    };
+    const addPost = (message, parentID) => {
+        console.log("addComment", message, parentID);
     }
-    console.log(parentPosts);
 
     useEffect(() => {
         const getPosts = async () => {
@@ -31,16 +35,22 @@ const Posts = ({ currentUserID }) => {
 
 
     return (
-        <div className={"posts"}>This is the Posts
-            <div className={"postsTitle"}>Posts!</div>
-            <div className={"postContainer"}>
-                {parentPosts.map((parent) => (
-                    <Post
-                        key={parent.id}
-                        post={parent}
-                        replies={getReplies(parent.id)}
-                    />
-                ))}
+        <div className={"chatContainer"}>
+            <div className={"posts"}>
+                This is the Posts
+                <div className={"postContainer"}>
+                    {parentPosts.map((parent) => (
+                        <Post
+                            key={parent.id}
+                            post={parent}
+                            replies={getReplies(parent.id)}
+                        />
+                    ))}
+                </div>
+            </div>
+            <div className={"postForm"}>
+                Time to discuss!
+                <PostBox submitLabel={"Write"} handleSubmit={addPost}/>
             </div>
         </div>
     )
