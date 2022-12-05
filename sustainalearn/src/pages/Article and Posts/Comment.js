@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./Comment.css"
+import "./Formatting/Comment.css"
 
 const Comment = ({ post, replies }) => {
     return (

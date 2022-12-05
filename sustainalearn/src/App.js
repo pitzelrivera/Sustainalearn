@@ -1,10 +1,10 @@
 import './App.css';
 import NavBar from "./NavBar";
-import Homepage from "./pages/Homepage";
-import Search from "./pages/Search";
-import Pages from "./pages/Pages";
-import Submission from "./pages/Submission";
-import About from "./pages/About";
+import Homepage from "./pages/Search/Homepage";
+import Search from "./pages/Search/Search";
+import Pages from "./pages/Article and Posts/Pages";
+import Submission from "./pages/Submission/Submission";
+import About from "./pages/About/About";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './styles.css'
 import backgroundImg from "./images/background.png"

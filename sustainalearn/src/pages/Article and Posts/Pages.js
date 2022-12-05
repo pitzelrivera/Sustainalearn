@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import App from "../App";
+import App from "../../App";
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Axios from 'axios'
-import { User, Post, ArticleInfo, Tag, ArticleTag } from "../db/types";
-import readError from "../db/errorHandle";
-import './Pages.css';
+import { User, Post, ArticleInfo, Tag, ArticleTag } from "../../db/types";
+import readError from "../../db/errorHandle";
+import './Formatting/Pages.css';
 import Posts from "./Posts"
 
 const Pages = () => {

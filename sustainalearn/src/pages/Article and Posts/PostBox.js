@@ -1,5 +1,5 @@
 import React, {Component, useState} from "react";
-import './PostBox.css'
+import './Formatting/PostBox.css'
 
 const PostBox = ({handleSubmit, submitLabel}) => {
     const [message, setMessage] = useState("");

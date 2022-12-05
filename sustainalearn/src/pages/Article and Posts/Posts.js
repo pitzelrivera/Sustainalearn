@@ -3,9 +3,9 @@ import Axios from "axios";
 import { useParams } from "react-router-dom";
 import Comment from './Comment';
 import PostBox from "./PostBox";
-import './Posts.css'
-import readError from "../db/errorHandle";
-import {Post} from "../db/types";
+import './Formatting/Posts.css'
+import readError from "../../db/errorHandle";
+import {Post} from "../../db/types";
 
 const Posts = ({ currentUserID, articleID }) => {
     const [postList, setPostList] = useState([]);
