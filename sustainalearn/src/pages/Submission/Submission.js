@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import './Submission.css'
 
 const Submission = () => {
     return (
-        <h1>This is the submission page</h1>
+        <div className={"submission"}>
+            <b>This is the submission page</b>
+        </div>
     )
 }
 
