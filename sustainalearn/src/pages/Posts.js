@@ -1,7 +1,7 @@
 import React, {Component, useEffect, useState} from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import Comment from './Post'
+import Comment from './Comment';
 import PostBox from "./PostBox";
 import './Posts.css'
 import readError from "../db/errorHandle";
@@ -34,7 +34,7 @@ const Posts = ({ currentUserID, articleID }) => {
         const makePost = async (newPost) => {
             Axios.post("http://localhost:3001/api/createPost", {Post: newPost})
                 .then(error => {
-                    setPostList([postList, newPost]);
+                    setPostList(oldArray => [...oldArray, newPost]);
                     console.log(postList);
                 });
         }
@@ -55,7 +55,7 @@ const Posts = ({ currentUserID, articleID }) => {
 
     return (
         <div className={"chatContainer"}>
-            <div className={"posts"}>
+            <div className={"chats"}>
                 <div className={"postContainer"}>
                     {parentPosts.map((parent) => (
                         <Comment

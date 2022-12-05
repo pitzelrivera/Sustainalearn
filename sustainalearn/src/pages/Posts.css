@@ -5,10 +5,10 @@
 }
 
 .postContainer {
-    overflow-y: scroll;
     padding-left: 10px;
 }
 
-.posts {
-    height: 41vh;
+.chats {
+    height: 360px;
+    overflow-y: scroll;
 }

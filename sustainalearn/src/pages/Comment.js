@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import "./Post.css"
+import "./Comment.css"
 
-const Post = ({ post, replies }) => {
+const Comment = ({ post, replies }) => {
     return (
         <div className={"posts"}>
             <div className={"postContent"}>
@@ -15,7 +15,7 @@ const Post = ({ post, replies }) => {
                 {replies.length > 0 && (
                     <div className={"replies"}>
                         {replies.map(reply => (
-                            <Post post={reply} key={reply.id} replies={[]}/>
+                            <Comment post={reply} key={reply.id} replies={[]}/>
                         ))}
                     </div>
                 )}
@@ -23,4 +23,4 @@ const Post = ({ post, replies }) => {
     )
 }
 
-export default Post;
+export default Comment;
