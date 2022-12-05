@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
 import React, { useReducer, useState } from 'react';
+import Axios from 'axios';
+import { User, Post, Article, Tag, ArticleTag, SubmissionInfo} from "../../db/types";
+import readError from "../../db/errorHandle";
 import './Submission.css';
 
 const formReducer = (state, event) => {
@@ -23,7 +25,7 @@ const Submission = () => {
                 reset: true
             });
             window.location.reload(true);
-        }, 3000)
+        }, 5000)
 
         setURL('');
     }
@@ -34,7 +36,7 @@ const Submission = () => {
         //extract domain and check if it ends in .com, .edu, or .org
         let domain = new URL(event.target.value).hostname.slice(-4);
 
-        switch (domain) {
+        switch(domain) {
             case ".com":
             case ".org":
             case ".edu":
@@ -42,6 +44,16 @@ const Submission = () => {
                     name: event.target.name,
                     value: event.target.value,
                 })
+
+                //insert code to insert into database here
+                const newSubmission = new SubmissionInfo(event.target.value, 0);
+                Axios.post("http://localhost:3001/api/createSubmission", { SubmissionInfo: newSubmission })
+                .then((error) => {
+                //console.log(error);
+                const errorMessage = readError(error);
+                console.log(errorMessage);
+                })
+
                 break;
             default:
                 setFormData({
@@ -49,11 +61,9 @@ const Submission = () => {
                     value: "",
                 })
         }
-
     }
 
     return (
-        <h1>This is the submission page</h1>
         <div className="submission">
             <h2>Contribute to Our Archive of Articles</h2>
             <form onSubmit={handleSubmit}>
@@ -84,3 +94,4 @@ const Submission = () => {
     )
 }
 
+export default Submission;
