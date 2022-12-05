@@ -9,36 +9,35 @@ import readError from "./db/errorHandle";
 
 const clientId = "582207653637-v3rikhn31efm2nshrtbclkq4bqogeh47.apps.googleusercontent.com";
 function Login() {
-    const [user, setUser] = useState({});
+	var [user, setUser] = useState({});
     
     function handleCallback(response) {
-	console.log("JWT Token:" + response.credential);
-	var userObject = jwt_decode(response.credential);
-	console.log(userObject);
-	setUser(userObject);
+		console.log("JWT Token:" + response.credential);
+		var userObject = jwt_decode(response.credential);
+		console.log(userObject);
+		setUser(userObject);
 	
-        const newUser = new User(user.sub, user.name, user.email, 0)
-	console.log(user.sub + user.name + user.email);
-	Axios.post("http://localhost:3001/api/createUser", { User: newUser })
-            .then(error => {
-                //console.log(error);
-                const errorMessage = readError(error);
-                console.log(errorMessage);
-            });
+		const newUser = new User(userObject.sub, userObject.name, userObject.email, 0)
+		console.log(newUser);
+		Axios.post("http://localhost:3001/api/createUser", { User: newUser })
+			.then(error => {
+				//console.log(error);
+				const errorMessage = readError(error);
+				console.log(errorMessage);
+			});
     }
 
     useEffect(() => {
 	/* global google */
-	google.accounts.id.initialize({
-	    client_id: clientId,
-	    callback: handleCallback
-	});
-	google.accounts.id.renderButton(
-	    document.getElementById("signInDiv"),
-	    { theme: "outline", size: "large"}
-	);
+		google.accounts.id.initialize({
+			client_id: clientId,
+			callback: handleCallback
+		});
+		google.accounts.id.renderButton(
+			document.getElementById("signInDiv"),
+			{ theme: "outline", size: "large"}
+		);
 	
-
     }, []);
     
 
