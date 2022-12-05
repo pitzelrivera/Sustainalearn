@@ -12,6 +12,7 @@ import backgroundImg from "./images/background.png"
 function App() {
     //const imageUrl = window.innerWidth >= 650 ? desktopImage : mobileImage;
 
+
     return (
         <BrowserRouter>
             <div>
