@@ -1,3 +1,27 @@
 .About-us {
     height: 100vh;
 }
+
+.about-quote {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+}
+
+.about-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: white;
+    margin-top: 20px;
+}
+
+.about-body {
+    font-family: sans-serif;
+    font-size: 18px;
+    color: white;
+    text-align: left;
+    width: 850px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
