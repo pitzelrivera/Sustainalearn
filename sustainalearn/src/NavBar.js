@@ -14,7 +14,7 @@ function NavBar() {
             <a href="/">
                 <button class="button"> Home </button>
             </a>
-            <a href="/about">
+            <a href="/About/About">
                 <button class="button"> About Us </button>
             </a>
 	    <Login/>

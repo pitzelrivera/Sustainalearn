@@ -1,0 +1,14 @@
+.postForm {
+    background-color: #999999;
+    height: 150px;
+    padding: 15px;
+}
+
+.postContainer {
+    padding-left: 10px;
+}
+
+.chats {
+    height: 300px;
+    overflow-y: scroll;
+}

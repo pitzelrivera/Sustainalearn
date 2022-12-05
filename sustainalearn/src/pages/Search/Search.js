@@ -1,9 +1,9 @@
 import React, { Component, useEffect } from 'react';
 import { useState } from 'react';
 import Axios from 'axios'
-import { User, Post, ArticleInfo, Tag, ArticleTag } from "../db/types";
-import readError from "../db/errorHandle";
-import SearchBar from "../SearchBar"
+import { User, Post, ArticleInfo, Tag, ArticleTag } from "../../db/types";
+import readError from "../../db/errorHandle";
+import SearchBar from "../../SearchBar"
 import './Search.css'
 
 var articleList = [];
