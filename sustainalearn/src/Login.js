@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import Axios from 'axios'
 import { User, Post, Article, Tag, ArticleTag } from "./db/types";
 import readError from "./db/errorHandle";
+import './Login.css'
 
 
 const clientId = "582207653637-v3rikhn31efm2nshrtbclkq4bqogeh47.apps.googleusercontent.com";
@@ -43,11 +44,11 @@ function Login() {
 
     return (
 	<div>
-	    <div id="signInDiv"></div>
+	    <div className="signInDiv"></div>
 	    { user &&
 	      <div>
-	      <img src={user.picture}></img>
-	      <h3>{user.name}</h3>
+	      <img className={"userImage"} src={user.picture}></img>
+	      <div className={"username"}>{user.name}</div>
 	      </div>
 	    }
 	</div>
