@@ -1,0 +1,22 @@
+.submit {
+    /*outline: none;*/
+    width: 500px;
+    height: 45px;
+    padding-left: 15px;
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: black;
+    border: 0;
+    border-radius: 22px;
+    /*border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;*/
+}
+
+.submission {
+    padding: 5px 20px;
+}
+
+.submission fieldset {
+    margin: 20px 0;
+}

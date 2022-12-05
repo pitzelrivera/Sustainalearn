@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react';
 import { useState } from 'react';
 import Axios from 'axios'
-import { User, Post, ArticleInfo, Tag, ArticleTag } from "../../db/types";
+import { User, Post, ArticleInfo, Tag, ArticleTag, SubmissionInfo } from "../../db/types";
 import readError from "../../db/errorHandle";
 import SearchBar from "../../SearchBar"
 import './Search.css'
@@ -22,6 +22,7 @@ const Search = () => {
 
     const submitPost = () => {
         const newPost = new Post(0, userID, username, articleID, parentID, message, highlight, 0, 0);
+        const newSubmission = new SubmissionInfo("submissionurl.org", 0);
         //const newUser = new User(3, "new user", "test email", 0)
 
         /*Axios.post("http://localhost:3001/api/createUser", { User: newUser })
@@ -37,8 +38,8 @@ const Search = () => {
                 console.log(userList);
             })
         */
-        
-        Axios.post("http://localhost:3001/api/createPost", { Post: newPost })
+
+        /*Axios.post("http://localhost:3001/api/createPost", { Post: newPost })
             .then(error => {
                 //console.log(error);
                 const errorMessage = readError(error);
@@ -49,6 +50,13 @@ const Search = () => {
             .then((response) => {
                 setPostList(response.data);
                 console.log(postList);
+            })*/
+
+        Axios.post("http://localhost:3001/api/createSubmission", { SubmissionInfo: newSubmission })
+            .then((error) => {
+                //console.log(error);
+                const errorMessage = readError(error);
+                console.log(errorMessage);
             })
         
     };

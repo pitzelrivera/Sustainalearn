@@ -51,4 +51,11 @@ class ArticleTag {
     }
 }
 
-module.exports = { User, Post, ArticleInfo, Tag, ArticleTag };
+class SubmissionInfo {
+    constructor(url, enteredAt) {
+        this.url = url;
+        this.enteredAt = enteredAt;
+    }
+}
+
+module.exports = { User, Post, ArticleInfo, Tag, ArticleTag, SubmissionInfo };

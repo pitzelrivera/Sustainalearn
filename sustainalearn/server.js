@@ -153,6 +153,36 @@ app.post("/api/deletePost/:id", async (req, res) => {
         console.log(result);
     });
 });
+
+// Route to create a URL submission
+app.post("/api/createSubmission", async (req, res) => {
+    const url = req.body.SubmissionInfo.url;
+    var date = new Date();
+    const enteredAt = date.toISOString().slice(0, 19).replace('T', ' ');
+
+    const sqlInsert =
+        "INSERT INTO submission (url, enteredAt) VALUES (?,?)";
+    db.query(sqlInsert, [url, enteredAt], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send(err);
+        }
+        console.log(result);
+    });
+});
+
+// Route to get all URL submissions
+app.get("/api/getSubmissions", async (req, res) => {
+    const sqlSelect =
+        "SELECT * FROM submission";
+    db.query(sqlSelect, (err, result) => {
+        submissionArray = makeSubmissions(result);
+        console.log(submissionArray);
+        res.send(submissionArray);
+    });
+})
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 
@@ -499,6 +529,16 @@ function makeArticleTags(result) {
         articletagArray.push(new ArticleTag(articleID, tagID));
     }
     return articletagArray;
+}
+
+function makeSubmissions(result) {
+    var submissionArray = [];
+    for (i = 0; i < result.length; i++) {
+        const url = result[i].url;
+        const enteredAt = result[i].enteredAt;
+        submissionArray.push(new SubmissionInfo(url, enteredAt));
+    }
+    return submissionArray;
 }
 
 app.listen(3001, () => {
