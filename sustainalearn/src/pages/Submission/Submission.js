@@ -42,7 +42,7 @@ const Submission = () => {
             case ".edu":
                 setFormData({
                     name: event.target.name,
-                    value: event.target.value,
+                    value: "Approved",
                 })
 
                 //insert code to insert into database here
@@ -58,7 +58,7 @@ const Submission = () => {
             default:
                 setFormData({
                     name: event.target.name,
-                    value: "",
+                    value: "Not Approved. Submit from websites ending in .org, .com, .edu",
                 })
         }
     }
