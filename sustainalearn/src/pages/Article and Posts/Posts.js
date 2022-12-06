@@ -6,11 +6,13 @@ import PostBox from "./PostBox";
 import './Formatting/Posts.css'
 import readError from "../../db/errorHandle";
 import {Post} from "../../db/types";
+import {currentUser} from "../../Login";
 
-const Posts = ({ currentUserID, articleID }) => {
+const Posts = ({ articleID }) => {
     const [postList, setPostList] = useState([]);
     const { id } = useParams();
     const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
+    const currUser = React.useContext(currentUser);
     const parentPosts = postList.filter(
         (postList) => postList.parentID == null
     );
@@ -26,7 +28,7 @@ const Posts = ({ currentUserID, articleID }) => {
     const addPost = (message, parentID) => {
         console.log("addComment", message, parentID);
         const newPost =
-            new Post(0, currentUserID, "admin", articleID, null, message,
+            new Post(0, currUser.id, currUser.username, articleID, null, message,
                 "", 0, 0);
         console.log("Making post!");
         console.log(newPost);
