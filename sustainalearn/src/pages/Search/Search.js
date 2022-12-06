@@ -20,7 +20,6 @@ const Search = () => {
     const [postList, setPostList] = useState([])
     const [userList, setUserList] = useState([])
 
-
     return (
         <div className="search">
             <>
