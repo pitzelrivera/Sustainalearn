@@ -56,21 +56,14 @@ const Pages = () => {
                     <div className={"chatTitle"}><b>Chat here!</b></div>
                         <div className={"posts"}>
                             {articleList.map(doc =>
-                                <Posts currentUserID = "1" articleID={doc.id} />
+                                <Posts articleID={doc.id} />
                             )}
                         </div>
                 </div>
             </div>
             <div>
                 <body>
-                    more content here below<br/>
-                    a lot<br/>
-                    .<br/>
-                    .<br/>
-                    .<br/>
-                    .
-                    .
-                    more
+                    Thank you for reading with us!
                 </body>
             </div>
         </div>
