@@ -10,9 +10,10 @@ import {currentUser} from "../../Login";
 
 const Posts = ({ articleID }) => {
     const [postList, setPostList] = useState([]);
+    const [currUser, setCurrUser] = useState([]);
     const { id } = useParams();
     const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
-    const currUser = React.useContext(currentUser);
+    const userUrl = "http://localhost:3001/api/getUser/" + currentUser.toString();
     const parentPosts = postList.filter(
         (postList) => postList.parentID == null
     );
@@ -52,6 +53,15 @@ const Posts = ({ articleID }) => {
                 });
         }
         getPosts();
+
+        const getUser = async () => {
+            const result = await Axios.get(userUrl)
+                .then(res => {
+                    setCurrUser(res.data);
+                    console.log(currUser);
+                })
+        }
+        getUser();
     }, []);
 
 
@@ -69,7 +79,10 @@ const Posts = ({ articleID }) => {
                 </div>
             </div>
             <div className={"postForm"}>
-                Time to discuss!
+                Time to discuss {currUser && currUser.map(user => (
+                    user.username
+                )
+            )}!
                 <PostBox submitLabel={"Write"} handleSubmit={addPost}/>
             </div>
         </div>

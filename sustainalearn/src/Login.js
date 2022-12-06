@@ -8,7 +8,7 @@ import { User, Post, Article, Tag, ArticleTag } from "./db/types";
 import readError from "./db/errorHandle";
 import './Login.css';
 
-export const currentUser = React.createContext(null);
+export let currentUser = null;
 
 const clientId = "582207653637-v3rikhn31efm2nshrtbclkq4bqogeh47.apps.googleusercontent.com";
 function Login() {
@@ -19,9 +19,10 @@ function Login() {
 		var userObject = jwt_decode(response.credential);
 		console.log(userObject);
 		setUser(userObject);
+		currentUser = userObject.sub;
+		console.log(currentUser);
 
 		const newUser = new User(userObject.sub, userObject.name, userObject.email, 0)
-		console.log(newUser);
 		Axios.post("http://localhost:3001/api/createUser", { User: newUser })
 			.then(error => {
 				//console.log(error);
@@ -40,21 +41,17 @@ function Login() {
 			document.getElementById("signInDiv"),
 			{ theme: "outline", size: "large"}
 		);
-
 	}, []);
-
 
 	return (
 		<div>
-			<currentUser.Provider value={user}>
-				<div id="signInDiv"></div>
-				{ user &&
-					<div>
-						<img className={"userImage"} src={user.picture}></img>
-						<div className={"username"}>{user.name}</div>
-					</div>
-				}
-			</currentUser.Provider>
+			<div id="signInDiv"></div>
+			{ user &&
+				<div>
+					<img className={"userImage"} src={user.picture}></img>
+					<div className={"username"}>{user.name}</div>
+				</div>
+			}
 		</div>
 	);
 }

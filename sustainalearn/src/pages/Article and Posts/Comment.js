@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 import "./Formatting/Comment.css"
+import {currentUser} from "../../Login";
 
 const Comment = ({ post, replies }) => {
+
+    //const canEdit = currentUser.id === post.userID;
     return (
         <div className={"posts"}>
             <div className={"postContent"}>
