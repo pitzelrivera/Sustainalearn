@@ -63,14 +63,7 @@ const Pages = () => {
             </div>
             <div>
                 <body>
-                    more content here below<br/>
-                    a lot<br/>
-                    .<br/>
-                    .<br/>
-                    .<br/>
-                    .
-                    .
-                    more
+                    Thank you for reading with us!
                 </body>
             </div>
         </div>

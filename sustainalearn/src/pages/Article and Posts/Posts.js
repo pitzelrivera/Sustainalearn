@@ -11,6 +11,7 @@ import {currentUser} from "../../Login";
 const Posts = ({ articleID }) => {
     const [postList, setPostList] = useState([]);
     const [currUser, setCurrUser] = useState([]);
+    const [typedPost, setTypedPost] = useState(null);
     const { id } = useParams();
     const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
     const userUrl = "http://localhost:3001/api/getUser/" + currentUser.toString();
@@ -26,10 +27,10 @@ const Posts = ({ articleID }) => {
     };
 
 
-    const addPost = (message, parentID) => {
+    const addPost = (message, parentID, currUser) => {
         console.log("addComment", message, parentID);
         const newPost =
-            new Post(0, currUser.id, currUser.username, articleID, null, message,
+            new Post(0, currUser.id, currUser.username, articleID, parentID, message,
                 "", 0, 0);
         console.log("Making post!");
         console.log(newPost);
@@ -72,8 +73,12 @@ const Posts = ({ articleID }) => {
                     {parentPosts.map((parent) => (
                         <Comment
                             key={parent.id}
+                            currentUser={currUser.at(0)}
                             post={parent}
                             replies={getReplies(parent.id)}
+                            typedPost={typedPost}
+                            setTypedPost={setTypedPost}
+                            addPost={addPost}
                         />
                     ))}
                 </div>
@@ -83,7 +88,7 @@ const Posts = ({ articleID }) => {
                     user.username
                 )
             )}!
-                <PostBox submitLabel={"Write"} handleSubmit={addPost}/>
+                <PostBox submitLabel={"Write"} handleSubmit={addPost} currentUser={currUser.at(0)}/>
             </div>
         </div>
     )
