@@ -9,3 +9,9 @@
 .postText {
     padding-left: 10px;
 }
+
+.actions {
+    padding: 0 10px;
+    font-size: small;
+    text-decoration: underline;
+}

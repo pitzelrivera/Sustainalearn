@@ -9,9 +9,12 @@ const Comment = ({ post, replies }) => {
                     <b>{post.username}</b>: {post.postedAt}
                 </div>
             </div>
-                <div className={"postText"}>
-                    {post.message}
-                </div>
+            <div className={"postText"}>
+                {post.message}
+            </div>
+            <div className={"actions"}>
+                <div className={"action"}>Reply</div>
+            </div>
                 {replies.length > 0 && (
                     <div className={"replies"}>
                         {replies.map(reply => (
