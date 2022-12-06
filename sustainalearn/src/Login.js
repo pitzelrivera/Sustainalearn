@@ -13,7 +13,8 @@ export let currentUser = null;
 const clientId = "582207653637-v3rikhn31efm2nshrtbclkq4bqogeh47.apps.googleusercontent.com";
 function Login() {
 	var [user, setUser] = useState({});
-
+	
+	/* decodes google API information */
 	function handleCallback(response) {
 		console.log("JWT Token:" + response.credential);
 		var userObject = jwt_decode(response.credential);
@@ -31,6 +32,7 @@ function Login() {
 			});
 	}
 
+	/* initializes google identity services */
 	useEffect(() => {
 		/* global google */
 		google.accounts.id.initialize({
@@ -43,6 +45,7 @@ function Login() {
 		);
 	}, []);
 
+	/* shows profile at top right */
 	return (
 		<div>
 			<div id="signInDiv"></div>
