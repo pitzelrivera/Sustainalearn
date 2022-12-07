@@ -8,9 +8,6 @@ function NavBar() {
             <a href="/submission">
                 <button type="button" class="button"> Contribute </button>
             </a>
-            <a href="/pages">
-                <button type="button" class="button"> Articles </button>
-            </a>
             <a href="/">
                 <button class="button"> Home </button>
             </a>

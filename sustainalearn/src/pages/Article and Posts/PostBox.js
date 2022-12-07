@@ -1,12 +1,12 @@
 import React, {Component, useState} from "react";
 import './Formatting/PostBox.css'
 
-const PostBox = ({handleSubmit, submitLabel}) => {
+const PostBox = ({handleSubmit, submitLabel, currentUser}) => {
     const [message, setMessage] = useState("");
     const isTextDisabled = message.length === 0;
     const onSubmit = event => {
         event.preventDefault();
-        handleSubmit(message);
+        handleSubmit(message, null, currentUser);
         setMessage("");
     };
 

@@ -13,7 +13,7 @@
 }
 
 .title {
-    font-family: "Times New Roman";
+    font-family: "Times New Roman", Serif;
     font-size: x-large;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .content {
-    font-family: "Times New Roman";
+    font-family: "Times New Roman", Serif;
     text-align: left;
     font-size: large;
     white-space: pre-wrap;

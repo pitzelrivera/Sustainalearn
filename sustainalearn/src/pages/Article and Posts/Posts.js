@@ -6,11 +6,15 @@ import PostBox from "./PostBox";
 import './Formatting/Posts.css'
 import readError from "../../db/errorHandle";
 import {Post} from "../../db/types";
+import {currentUser} from "../../Login";
 
-const Posts = ({ currentUserID, articleID }) => {
+const Posts = ({ articleID }) => {
     const [postList, setPostList] = useState([]);
+    const [currUser, setCurrUser] = useState([]);
+    const [typedPost, setTypedPost] = useState(null);
     const { id } = useParams();
     const postsUrl = "http://localhost:3001/api/getArticlePosts/" + id.toString();
+    const userUrl = "http://localhost:3001/api/getUser/" + currentUser.toString();
     const parentPosts = postList.filter(
         (postList) => postList.parentID == null
     );
@@ -23,10 +27,10 @@ const Posts = ({ currentUserID, articleID }) => {
     };
 
 
-    const addPost = (message, parentID) => {
+    const addPost = (message, parentID, currUser) => {
         console.log("addComment", message, parentID);
         const newPost =
-            new Post(0, currentUserID, "admin", articleID, null, message,
+            new Post(0, currUser.id, currUser.username, articleID, parentID, message,
                 "", 0, 0);
         console.log("Making post!");
         console.log(newPost);
@@ -50,6 +54,15 @@ const Posts = ({ currentUserID, articleID }) => {
                 });
         }
         getPosts();
+
+        const getUser = async () => {
+            const result = await Axios.get(userUrl)
+                .then(res => {
+                    setCurrUser(res.data);
+                    console.log(currUser);
+                })
+        }
+        getUser();
     }, []);
 
 
@@ -60,15 +73,22 @@ const Posts = ({ currentUserID, articleID }) => {
                     {parentPosts.map((parent) => (
                         <Comment
                             key={parent.id}
+                            currentUser={currUser.at(0)}
                             post={parent}
                             replies={getReplies(parent.id)}
+                            typedPost={typedPost}
+                            setTypedPost={setTypedPost}
+                            addPost={addPost}
                         />
                     ))}
                 </div>
             </div>
             <div className={"postForm"}>
-                Time to discuss!
-                <PostBox submitLabel={"Write"} handleSubmit={addPost}/>
+                Time to discuss {currUser && currUser.map(user => (
+                    user.username
+                )
+            )}!
+                <PostBox submitLabel={"Write"} handleSubmit={addPost} currentUser={currUser.at(0)}/>
             </div>
         </div>
     )

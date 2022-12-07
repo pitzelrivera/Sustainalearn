@@ -48,11 +48,11 @@ const Submission = () => {
                 //insert code to insert into database here
                 const newSubmission = new SubmissionInfo(event.target.value, 0);
                 Axios.post("http://localhost:3001/api/createSubmission", { SubmissionInfo: newSubmission })
-                .then((error) => {
-                //console.log(error);
-                const errorMessage = readError(error);
-                console.log(errorMessage);
-                })
+                    .then((error) => {
+                        //console.log(error);
+                        const errorMessage = readError(error);
+                        console.log(errorMessage);
+                    })
 
                 break;
             default:
@@ -67,28 +67,28 @@ const Submission = () => {
         <div className="submission">
             <h2>Contribute to Our Archive of Articles</h2>
             <form onSubmit={handleSubmit}>
-            <fieldset>
-                <label>
-                    <h3>Found an Article You Think We Should Add, Insert Down Below!</h3>
-                    {submitting &&
-                    <div>Checking Article...
-                        <ul>
-                            {Object.entries(formData).map(([name, value]) => (
-                                <li key={name}>{value.toString()}</li>
-                            ))}
-                        </ul>
-                    </div>
-                    }
-                    <input 
-                    className="submit"
-                    name = "url"
-                    placeholder="Insert URL to Article..."
-                    onChange={handleChange}
-                    value={url}
-                    />
-                </label>
-            </fieldset>
-            <button type="submit">Submit</button>
+                <fieldset>
+                    <label>
+                        <h3>Found an Article You Think We Should Add, Insert Down Below!</h3>
+                        {submitting &&
+                            <div>Checking Article...
+                                <ul>
+                                    {Object.entries(formData).map(([name, value]) => (
+                                        <li key={name}>{value.toString()}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
+                        <input
+                            className="submit"
+                            name = "url"
+                            placeholder="Insert URL to Article..."
+                            onChange={handleChange}
+                            value={url}
+                        />
+                    </label>
+                </fieldset>
+                <button type="submit">Submit</button>
             </form>
         </div>
     )
